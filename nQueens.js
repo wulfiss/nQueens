@@ -51,8 +51,18 @@ const nQueens = (x, y) => {
   ];
 
   const invalid = new Set();
-  const start = [random(x), random(y)];
+  const start = [3, 3]; /* [random(x), random(y)]; */
 
-  return start;
+  const queue = [[start]];
+  let current = start;
+  console.log(current);
+  for (const move of moves) {
+    let next = start;
+    while (next[0] >= 0 && next[0] <= 7 && next[1] >= 0 && next[1] <= 7) {
+      invalid.add(next.toString());
+      next = [next[0] + move[0], next[1] + move[1]];
+    }
+  }
+  return invalid;
 };
 export { nQueens };
