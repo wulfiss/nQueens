@@ -3,6 +3,18 @@ const random = (num) => {
 };
 
 const nQueens = (x = 8, y = 8, xS = random(x), yS = random(y)) => {
+  // check if the coordinates of the first queen is inside of the board
+  if (xS > x && yS > y) {
+    return `The coordinates of the Queen are outside of the board`;
+  }
+  if (xS > x) {
+    return `The coordinate X of the Queen is outside of the board`;
+  }
+
+  if (yS > y) {
+    return `The coordinate Y of the Queen is outside of the board`;
+  }
+
   const moves = [
     //all the direction of the move that the queen can do;
     [-1, 1],
