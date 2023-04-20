@@ -38,7 +38,7 @@ const random = (num) => {
   return Math.floor(Math.random() * num);
 };
 
-const nQueens = (x, y) => {
+const nQueens = (x = 8, y = 8, xS = random(x), yS = random(y)) => {
   const moves = [
     [-1, 1],
     [0, 1],
@@ -51,18 +51,32 @@ const nQueens = (x, y) => {
   ];
 
   const invalid = new Set();
-  const start = [3, 3]; /* [random(x), random(y)]; */
+  const start = [xS, yS];
+  const queue = [start];
+  let positions = [];
 
-  const queue = [[start]];
-  let current = start;
-  console.log(current);
-  for (const move of moves) {
-    let next = start;
-    while (next[0] >= 0 && next[0] <= 7 && next[1] >= 0 && next[1] <= 7) {
-      invalid.add(next.toString());
-      next = [next[0] + move[0], next[1] + move[1]];
+  for (let i = 0; i < x; i += 1) {
+    for (let j = 0; j < y; j += 1) {
+      queue.push([i, j]);
     }
   }
-  return invalid;
+
+  while (queue.length > 0) {
+    let current = queue.shift();
+
+    if (invalid.has(current.toString())) {
+      continue;
+    }
+
+    positions.push(current);
+    for (const move of moves) {
+      let next = current;
+      while (next[0] >= 0 && next[0] <= x && next[1] >= 0 && next[1] <= y) {
+        invalid.add(next.toString());
+        next = [next[0] + move[0], next[1] + move[1]];
+      }
+    }
+  }
+  return positions;
 };
 export { nQueens };
