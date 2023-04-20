@@ -34,7 +34,11 @@ const knightMoves = (start, end) => {
   return null;
 };
 
-const nQueen = (x, y) => {
+const random = (num) => {
+  return Math.floor(Math.random() * num);
+};
+
+const nQueens = (x, y) => {
   const moves = [
     [-1, 1],
     [0, 1],
@@ -45,5 +49,10 @@ const nQueen = (x, y) => {
     [-1, -1],
     [-1, 0],
   ];
+
+  const invalid = new Set();
+  const start = [random(x), random(y)];
+
+  return start;
 };
-export { knightMoves };
+export { nQueens };
